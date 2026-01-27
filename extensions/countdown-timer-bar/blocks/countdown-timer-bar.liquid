@@ -1,0 +1,31 @@
+{% comment %} Countdown Timer Bar app block {% endcomment %}
+<div id="s-wave-countdown-bar"
+  data-end-time="{{ block.settings.end_time }}"
+  data-prefix="{{ block.settings.prefix | escape }}">
+  <span class="s-wave-countdown-bar__text"></span>
+  <span class="s-wave-countdown-bar__time"></span>
+</div>
+
+{{ 'countdown-timer-bar.css' | asset_url | stylesheet_tag }}
+{{ 'countdown-timer-bar.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "Countdown timer bar",
+  "target": "body",
+  "settings": [
+    {
+      "type": "text",
+      "id": "prefix",
+      "label": "Message prefix",
+      "default": "Offer ends in"
+    },
+    {
+      "type": "text",
+      "id": "end_time",
+      "label": "End time (ISO 8601)",
+      "default": "2026-12-31T23:59:59Z"
+    }
+  ]
+}
+{% endschema %}

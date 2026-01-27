@@ -1,0 +1,32 @@
+:root {
+  --s-wave-countdown-bg: #111111;
+  --s-wave-countdown-text: #ffffff;
+  --s-wave-countdown-accent: #f8d90f;
+}
+
+#s-wave-countdown-bar {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  padding: 10px 16px;
+  background: var(--s-wave-countdown-bg);
+  color: var(--s-wave-countdown-text);
+  text-align: center;
+  font-family: inherit;
+  display: none;
+}
+
+#s-wave-countdown-bar.is-visible {
+  display: block;
+}
+
+.s-wave-countdown-bar__text {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.s-wave-countdown-bar__time {
+  color: var(--s-wave-countdown-accent);
+  margin-left: 6px;
+}

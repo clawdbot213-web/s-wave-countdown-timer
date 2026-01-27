@@ -23,11 +23,15 @@
       .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
+  let intervalId;
   const tick = () => {
     const now = Date.now();
     const remaining = Math.max(0, Math.floor((endTime - now) / 1000));
     if (remaining <= 0) {
       bar.classList.remove('is-visible');
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
       return;
     }
     textEl.textContent = prefix;
@@ -36,5 +40,5 @@
   };
 
   tick();
-  setInterval(tick, 1000);
+  intervalId = setInterval(tick, 1000);
 })();

@@ -38,8 +38,10 @@
   data-cta-style="{{ block.settings.cta_style }}"
 >
   <div class="s-wave-countdown-bar__inner">
-    <span class="s-wave-countdown-bar__text"></span>
-    <span class="s-wave-countdown-bar__time"></span>
+    <div class="s-wave-countdown-bar__content">
+      <span class="s-wave-countdown-bar__text"></span>
+      <span class="s-wave-countdown-bar__time" aria-live="polite"></span>
+    </div>
     {% if block.settings.cta_label != blank and block.settings.cta_link != blank %}
       <a
         class="s-wave-countdown-bar__cta s-wave-countdown-bar__cta--{{ block.settings.cta_style }}"

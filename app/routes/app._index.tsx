@@ -8,7 +8,6 @@ import {
   BlockStack,
   InlineStack,
   List,
-  Box,
   Badge,
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
@@ -32,11 +31,12 @@ export default function Index() {
             <Card>
               <BlockStack gap="400">
                 <BlockStack gap="200">
-                  <Text as="h2" variant="headingMd">
-                    Quick start
+                  <Text as="h2" variant="headingLg">
+                    Launch in minutes
                   </Text>
-                  <Text as="p" variant="bodyMd">
-                    Launch a high-converting countdown bar in minutes.
+                  <Text as="p" variant="bodyMd" tone="subdued">
+                    Build a premium countdown bar with a high-impact CTA and
+                    polished progress styling.
                   </Text>
                 </BlockStack>
                 <List type="number">
@@ -48,7 +48,7 @@ export default function Index() {
                     Set the end time, message, and CTA link.
                   </List.Item>
                 </List>
-                <InlineStack gap="300">
+                <InlineStack gap="300" wrap>
                   <Button url={THEME_EDITOR_URL} target="_top" variant="primary">
                     Open theme editor
                   </Button>
@@ -65,14 +65,19 @@ export default function Index() {
                 <Text as="h2" variant="headingMd">
                   Status
                 </Text>
-                <InlineStack gap="200" align="start">
+                <InlineStack gap="200" align="start" wrap>
                   <Badge tone="success">App installed</Badge>
-                  <Badge>Theme app extension</Badge>
+                  <Badge tone="info">Theme app extension</Badge>
                 </InlineStack>
-                <Text as="p" variant="bodySm">
+                <Text as="p" variant="bodySm" tone="subdued">
                   The bar appears on every page where the app block is enabled.
                 </Text>
-                <Button url={THEME_EDITOR_URL} target="_top" fullWidth>
+                <Button
+                  url={THEME_EDITOR_URL}
+                  target="_top"
+                  fullWidth
+                  variant="primary"
+                >
                   Add app block
                 </Button>
               </BlockStack>
@@ -87,7 +92,7 @@ export default function Index() {
                 <Text as="h2" variant="headingMd">
                   Built-in controls
                 </Text>
-                <Text as="p" variant="bodyMd">
+                <Text as="p" variant="bodyMd" tone="subdued">
                   Highlight urgency with CTA buttons, progress bars, and premium
                   themes.
                 </Text>
@@ -100,17 +105,9 @@ export default function Index() {
                     "Expired message",
                     "Custom colors",
                   ].map((label) => (
-                    <Box
-                      key={label}
-                      padding="200"
-                      borderWidth="025"
-                      borderRadius="200"
-                      borderColor="border"
-                    >
-                      <Text as="span" variant="bodySm">
-                        {label}
-                      </Text>
-                    </Box>
+                    <Badge key={label} tone="info">
+                      {label}
+                    </Badge>
                   ))}
                 </InlineStack>
               </BlockStack>

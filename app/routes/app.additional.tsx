@@ -2,6 +2,7 @@ import {
   Badge,
   BlockStack,
   Box,
+  Button,
   Card,
   InlineStack,
   Layout,
@@ -9,6 +10,8 @@ import {
   Text,
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
+
+const THEME_EDITOR_URL = "shopify:admin/themes/current/editor?context=apps";
 
 const presets = [
   {
@@ -41,13 +44,15 @@ export default function AdditionalPage() {
         <Layout.Section>
           <Card>
             <BlockStack gap="400">
-              <Text as="h2" variant="headingMd">
-                Theme presets
-              </Text>
-              <Text as="p" variant="bodyMd">
-                Pair your countdown with an offer CTA and progress bar for the
-                biggest lift.
-              </Text>
+              <BlockStack gap="200">
+                <Text as="h2" variant="headingLg">
+                  Theme presets
+                </Text>
+                <Text as="p" variant="bodyMd" tone="subdued">
+                  Pair your countdown with an offer CTA and progress bar for the
+                  biggest lift.
+                </Text>
+              </BlockStack>
               <BlockStack gap="300">
                 {presets.map((preset) => (
                   <Box
@@ -58,7 +63,7 @@ export default function AdditionalPage() {
                     borderColor="border"
                   >
                     <BlockStack gap="150">
-                      <InlineStack gap="200" align="start">
+                      <InlineStack gap="200" align="start" wrap>
                         <Badge tone="info">{preset.name}</Badge>
                         <Text as="span" variant="bodySm" tone="subdued">
                           {preset.description}
@@ -77,13 +82,18 @@ export default function AdditionalPage() {
               <Text as="h2" variant="headingMd">
                 Pro tips
               </Text>
-              <Text as="p" variant="bodySm">
-                Use a CTA label like “Shop now” and set end times in UTC (ISO
-                format).
-              </Text>
-              <Text as="p" variant="bodySm">
-                Enable the progress bar to visually show time running out.
-              </Text>
+              <BlockStack gap="200">
+                <Text as="p" variant="bodySm" tone="subdued">
+                  Use a CTA label like “Shop now” and set end times in UTC (ISO
+                  format).
+                </Text>
+                <Text as="p" variant="bodySm" tone="subdued">
+                  Enable the progress bar to visually show time running out.
+                </Text>
+              </BlockStack>
+              <Button url={THEME_EDITOR_URL} target="_top" variant="primary">
+                Open theme editor
+              </Button>
             </BlockStack>
           </Card>
         </Layout.Section>

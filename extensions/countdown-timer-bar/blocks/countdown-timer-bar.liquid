@@ -1,9 +1,57 @@
 {% comment %} Countdown Timer Bar app block {% endcomment %}
-<div id="s-wave-countdown-bar"
+{% assign theme = block.settings.theme_style %}
+{% assign bg = '#111827' %}
+{% assign text = '#ffffff' %}
+{% assign accent = '#f59e0b' %}
+
+{% if theme == 'light' %}
+  {% assign bg = '#ffffff' %}
+  {% assign text = '#111827' %}
+  {% assign accent = '#f97316' %}
+{% elsif theme == 'vibrant' %}
+  {% assign bg = '#1d4ed8' %}
+  {% assign text = '#ffffff' %}
+  {% assign accent = '#f8fafc' %}
+{% elsif theme == 'minimal' %}
+  {% assign bg = '#ffffff' %}
+  {% assign text = '#111827' %}
+  {% assign accent = '#111827' %}
+{% elsif theme == 'custom' %}
+  {% assign bg = block.settings.background_color %}
+  {% assign text = block.settings.text_color %}
+  {% assign accent = block.settings.accent_color %}
+{% endif %}
+
+<div
+  id="s-wave-countdown-bar"
+  class="s-wave-countdown-bar s-wave-theme--{{ theme }} s-wave-position--{{ block.settings.position }}"
+  style="--s-wave-countdown-bg: {{ bg }}; --s-wave-countdown-text: {{ text }}; --s-wave-countdown-accent: {{ accent }};"
+  data-start-time="{{ block.settings.start_time }}"
   data-end-time="{{ block.settings.end_time }}"
-  data-prefix="{{ block.settings.prefix | escape }}">
-  <span class="s-wave-countdown-bar__text"></span>
-  <span class="s-wave-countdown-bar__time"></span>
+  data-prefix="{{ block.settings.prefix | escape }}"
+  data-expired-message="{{ block.settings.expired_message | escape }}"
+  data-expired-behavior="{{ block.settings.expired_behavior }}"
+  data-show-days="{{ block.settings.show_days }}"
+  data-show-progress="{{ block.settings.show_progress }}"
+  data-cta-label="{{ block.settings.cta_label | escape }}"
+  data-cta-link="{{ block.settings.cta_link }}"
+  data-cta-style="{{ block.settings.cta_style }}"
+>
+  <div class="s-wave-countdown-bar__inner">
+    <span class="s-wave-countdown-bar__text"></span>
+    <span class="s-wave-countdown-bar__time"></span>
+    {% if block.settings.cta_label != blank and block.settings.cta_link != blank %}
+      <a
+        class="s-wave-countdown-bar__cta s-wave-countdown-bar__cta--{{ block.settings.cta_style }}"
+        href="{{ block.settings.cta_link }}"
+      >
+        {{ block.settings.cta_label }}
+      </a>
+    {% endif %}
+  </div>
+  <div class="s-wave-countdown-bar__progress">
+    <div class="s-wave-countdown-bar__progress-fill"></div>
+  </div>
 </div>
 
 {{ 'countdown-timer-bar.css' | asset_url | stylesheet_tag }}
@@ -22,9 +70,105 @@
     },
     {
       "type": "text",
+      "id": "start_time",
+      "label": "Start time (ISO 8601)",
+      "default": "2026-01-01T00:00:00Z"
+    },
+    {
+      "type": "text",
       "id": "end_time",
       "label": "End time (ISO 8601)",
       "default": "2026-12-31T23:59:59Z"
+    },
+    {
+      "type": "text",
+      "id": "expired_message",
+      "label": "Expired message",
+      "default": "Offer expired"
+    },
+    {
+      "type": "select",
+      "id": "expired_behavior",
+      "label": "When expired",
+      "default": "hide",
+      "options": [
+        { "value": "hide", "label": "Hide bar" },
+        { "value": "message", "label": "Show expired message" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_days",
+      "label": "Show days",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_progress",
+      "label": "Show progress bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "select",
+      "id": "cta_style",
+      "label": "CTA style",
+      "default": "solid",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "outline", "label": "Outline" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Position",
+      "default": "top",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "theme_style",
+      "label": "Theme preset",
+      "default": "dark",
+      "options": [
+        { "value": "dark", "label": "Dark" },
+        { "value": "light", "label": "Light" },
+        { "value": "vibrant", "label": "Vibrant" },
+        { "value": "minimal", "label": "Minimal" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#f59e0b"
     }
   ]
 }

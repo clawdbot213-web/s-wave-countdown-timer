@@ -36,6 +36,14 @@
     const now = Date.now();
     const remaining = Math.max(0, Math.floor((endTime - now) / 1000));
 
+    if (startTime && now < startTime) {
+      bar.classList.remove('is-visible');
+      if (progressTrack) {
+        progressTrack.style.display = 'none';
+      }
+      return;
+    }
+
     if (remaining <= 0) {
       if (expiredBehavior === 'message') {
         textEl.textContent = expiredMessage;
